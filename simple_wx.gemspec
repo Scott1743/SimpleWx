@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "simple_wx"
   spec.version       = SimpleWx::VERSION
   spec.authors       = ["Scott1743"]
+  spec.email         = ["512981271@qq.com"]
   spec.summary       = ""
   spec.description   = %q{Ruby Api for WeiXin}
   spec.license       = "MIT"
