@@ -1,0 +1,5 @@
+module SimpleWx
+  @@weixin_config = YAML.load_file(File.join "#{Rails.root}", "config", "weixin.yml")[Rails.env || "development"]
+  @@logger = Rails.logger
+  @@redis  = Redis::Objects.redis
+end
