@@ -188,8 +188,9 @@ get jsapi_ticket
 获取用户信息 OAuth 接口
 
 ```ruby
-  instance_of_oauth = SimpleWx::OAuth.new("code").get_access_token
-  SimpleWx::UserInfo.get_auth_info(o_auth: instance_of_oauth)
+  o_auth = SimpleWx::OAuth.new("code")
+  o_auth.get_access_token
+  SimpleWx::UserInfo.get_auth_info(o_auth: o_auth)
 ```
 
 ------
