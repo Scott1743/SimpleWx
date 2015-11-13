@@ -43,7 +43,11 @@ module SimpleWx
     end
 
     def get_user_info
-      UserInfo.get_auth_info(o_auth: self)
+      if @scope == "snsapi_base"
+        UserInfo.get_base_info(openid: @openid)
+      else
+        UserInfo.get_auth_info(o_auth: self)
+      end
     end
 
     def access_token_valid?

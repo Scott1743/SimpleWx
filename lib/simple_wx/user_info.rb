@@ -9,12 +9,12 @@ module SimpleWx
     # instance_of_oauth.get_access_token
     # user_info_hsh = SimpleWx::UserInfo.get_auth_info(o_auth: instance_of_oauth)
     #
-    # user_info_hsh = SimpleWx::UserInfo.get_basic_info(access_token: "token", openid: "openid")
+    # user_info_hsh = SimpleWx::UserInfo.get_base_info(access_token: "token", openid: "openid")
     #
     # ---------- instance-methods -----------
     #
     # @user_info = SimpleWx::UserInfo.new(access_token: "token", openid: "openid")
-    # user_info_hsh = @user_info.get_basic_info
+    # user_info_hsh = @user_info.get_base_info
     # if @user_info.error.present?
     #   ...
     # end
@@ -26,7 +26,7 @@ module SimpleWx
       @access_token = options[:access_token] || AccessToken.access_token
     end
 
-    def get_basic_info
+    def get_base_info
       url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=#{@access_token}&openid=#{@openid}&lang=zh_CN"
       response = RestClient.get url
       errcode_check(JSON.parse(response))
