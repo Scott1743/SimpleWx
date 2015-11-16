@@ -34,6 +34,8 @@ module SimpleWx
 
     def initialize options
       @code = options[:code]
+      @access_token = options[:access_token]
+      @openid = options[:openid]
     end
 
     def get_access_token

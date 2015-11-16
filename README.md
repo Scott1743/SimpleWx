@@ -175,6 +175,13 @@ get jsapi_ticket
   auth.get_user_info
 ```
 
+__第三方登录获取user_info__
+
+```ruby
+  auth = SimpleWx::OAuth.new(access_token: "o_auth_access_token", openid: "openid")
+  auth.get_user_info
+```
+
 ------
 
 ### UserInfo
