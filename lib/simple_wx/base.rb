@@ -9,6 +9,14 @@ module SimpleWx
       @error = {}
     end
 
+    def self.method_missing m, *args
+      if public_instance_methods(false).include? m.to_sym
+        self.new(*args).send(m)
+      else
+        super
+      end
+    end
+
     protected
 
     def errcode_check json, log_flag = nil

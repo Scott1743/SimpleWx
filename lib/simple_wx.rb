@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'redis'
 require 'yell'
+require 'nokogiri'
 
 module SimpleWx
   @@weixin_config = {}
@@ -26,6 +27,7 @@ require 'simple_wx/o_auth'
 require 'simple_wx/access_token'
 require 'simple_wx/menu'
 require 'simple_wx/user_info'
+require 'simple_wx/media'
 require 'simple_wx/message'
 require 'simple_wx/messages/text_message'
 require 'simple_wx/messages/image_message'
@@ -33,4 +35,4 @@ require 'simple_wx/messages/news_message'
 require 'simple_wx/messages/video_message'
 require 'simple_wx/messages/voice_message'
 require 'simple_wx/messages/music_message'
-
+require 'simple_wx/template'

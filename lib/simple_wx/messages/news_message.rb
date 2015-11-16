@@ -15,7 +15,18 @@ module SimpleWx
 
       def to_xml
         @xml["MsgType"] = "news"
-        @xml["News"] = { "Articles" => @articles }
+        @xml["ArticleCount"] = @articles.size
+        @xml["Articles"] = @articles.map do |item|
+          {
+            "item" =>
+              {
+                "Title"       => item[:title],
+                "Description" => item[:description],
+                "PicUrl"      => item[:picurl],
+                "Url"         => item[:url]
+              }
+          }
+        end
         super
       end
     end

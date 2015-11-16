@@ -34,8 +34,7 @@ module SimpleWx
     def show
       url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=#{@access_token}"
       response = RestClient.get url
-      response_json = errcode_check(JSON.parse(response))
-      @menus = response_json["menu"]
+      errcode_check(JSON.parse(response))
     end
 
     def create menu_hash
@@ -60,14 +59,6 @@ module SimpleWx
     def delete!
       @raise_flag ||= true
       delete
-    end
-
-    def self.method_missing m, *args
-      if instance_methods.include? m.to_sym
-        self.new.send(m, *args)
-      else
-        super
-      end
     end
   end
 end

@@ -26,7 +26,7 @@ Add this line to your application's Gemfile:
     # 配置微信参数
     # 配置日志对象
     # 配置 Redis，用来存放 access_token 和 jsapi_ticket
-    
+
     # @@weixin_config = YAML.load_file(File.join "#{Rails.root}", "config", "weixin.yml")
     @@weixin_config = { "app_id"=>"app_id",
                         "app_secret"=>"app_secret",
@@ -93,7 +93,7 @@ Add this line to your application's Gemfile:
 get access_token
 
 ```ruby
-  SimpleWx::AccessToken.access_token  
+  SimpleWx::AccessToken.access_token
 ```
 
 get 微信服务器ip
@@ -148,7 +148,7 @@ get jsapi_ticket
 
 检查 `access_token` 是否过期
 
-```ruby  
+```ruby
   auth.access_token_valid?
   => true/false
 ```
@@ -160,7 +160,7 @@ get jsapi_ticket
   # => 7200
 ```
 
-刷新 `access_token` 
+刷新 `access_token`
 
 ```ruby
   result_json = auth.refresh_token
@@ -197,39 +197,100 @@ get jsapi_ticket
 
 ### Message
 
-信息对象
-
-```ruby
-  msg = SimpleWx::Messages::TextMessage.new openid: "to_user", content: "content"  
-```
-
 通过客服接口发送
 
 ```ruby
-  msg.send_json
-  msg.send_json!
+  message_params = {openid: "to_user", content: "content"}
+  SimpleWx::Messages::TextMessage.send_json!(message_params)
+  SimpleWx::Messages::TextMessage.send_json(message_params)
 ```
 
 直接返回给微信
 
 ```ruby
-  render xml: msg.to_xml
+  message_params = {openid: "to_user", content: "content"}
+  render xml: SimpleWx::Messages::TextMessage.to_xml(message_params)
+```
+
+使用对象方式
+
+```ruby
+  msg = SimpleWx::Messages::TextMessage.new openid: "to_user", content: "content"
+  msg.send_json
+  msg.to_xml
 ```
 
 信息对象列举：
 
 ```ruby
-  msg = SimpleWx::Messages::TextMessage.new openid: "to_user", content: "content"  
-  #TODO
+  msg = SimpleWx::Messages::TextMessage.new openid: "to_user", content: "content"
+  msg = SimpleWx::Messages::ImageMessage.new openid: "to_user", media_id: "media_id"
+  msg = SimpleWx::Messages::VoiceMessage.new openid: "to_user", media_id: "media_id"
+  video = { title: 'title', media_id: 'media_id', description: 'desc' }
+  msg = SimpleWx::Messages::VideoMessage.new openid: "to_user", video: video
+
+  music = { title: 'title', description: 'desc', music_url: 'url', hq_music_url: 'hq_url', thumb_media_id: 'thumb_media_id' }
+  msg = SimpleWx::Messages::MusicMessage.new openid: "to_user", music: music
+
+  # 图文信息必须使用数组包围
+  articles = [{title: 'title1', description: 'desc1', url: 'url1', picurl: 'picurl1'}, {title: 'title2', ..., picurl: 'picurl2'}, ...]
+  msg = SimpleWx::Messages::NewsMessage.new openid: "to_user", articles: articles
+```
+
+------
+
+### Template
+
+改变行业id
+
+```ruby
+  SimpleWx::Template.set_industry id1, id2
+```
+
+获取模板id
+
+```ruby
+  SimpleWx::Template.get_template_id(template_id_short: "TM00015")
+```
+
+发送模板信息
+
+```ruby
+  params = {
+    openid: openid,
+    template_id: "JrneF1SO3wo1K3qG1GL-zplmJpvxFsrIeBWPFYKIBB4",
+    url: open_url,
+    topcolor: "#FF0000",
+    data: {
+      ...
+    }
+  }
+  SimpleWx::Template.send_json(params)
+```
+
+------
+
+### Media
+
+获取临时素材
+
+```ruby
+  SimpleWx::Media.get_media(media_id: "media_id")
+```
+
+获取永久素材
+
+```ruby
+  SimpleWx::Media.get_material(media_id: "media_id")
 ```
 
 ------
 
 ### Base
 
-上面所有的方法都能使用实例方法实现。
-使用实例方法的方式，能获得一个 error 参数，检查微信接口是否有错误码返回。
-error 参数每次都会刷新
+上面所有的方法都能使用__类方法__和__实例方法__实现。
+使用实例的方式，能获得一个 error 参数，检查微信接口是否有错误码返回。
+error 在每次请求微信API时都会刷新.
 
 eg.
 

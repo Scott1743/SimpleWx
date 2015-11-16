@@ -2,8 +2,8 @@ module SimpleWx
   class Message < Base
     attr_accessor :openid, :json, :xml
     def initialize options
-      @openid = options.delete(:openid)
-      @access_token = options.delete(:access_token) || AccessToken.access_token
+      @openid = options[:openid]
+      @access_token = options[:access_token] || AccessToken.access_token
       @custom_msg_url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=#{@access_token}"
       @json = {}
       @xml = {}
@@ -49,6 +49,12 @@ module SimpleWx
         if v.is_a? Hash
           builder.send(k) do
             recursively_xml(builder, v)
+          end
+        elsif v.is_a? Array
+          builder.send(k) do
+            v.each do |item|
+              recursively_xml(builder, item)
+            end
           end
         else
           builder.send(k, v)

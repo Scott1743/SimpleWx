@@ -66,14 +66,5 @@ module SimpleWx
       end
       access_token
     end
-
-    def self.method_missing m
-      instance = self.new
-      if instance.public_methods(false).include? m.to_sym
-        return instance.send(m)
-      else
-        super
-      end
-    end
   end
 end
