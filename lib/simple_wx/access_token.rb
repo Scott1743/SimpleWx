@@ -44,10 +44,10 @@ module SimpleWx
       response = RestClient.get url
       response_json = errcode_check(JSON.parse(response))
       jsapi_ticket = response_json["ticket"]
-      if @error.blank?
+      if @error.empty?
         SimpleWx.redis.multi do
           SimpleWx.redis.set "__jsapi_ticket__", jsapi_ticket
-          SimpleWx.redis.expire "__jsapi_ticket__", 30.minutes.to_i
+          SimpleWx.redis.expire "__jsapi_ticket__", 30*60
         end
       end
       jsapi_ticket
@@ -58,10 +58,10 @@ module SimpleWx
       response = RestClient.get url
       response_json = errcode_check(JSON.parse(response))
       access_token = response_json["access_token"]
-      if @error.blank?
+      if @error.empty?
         SimpleWx.redis.multi do
           SimpleWx.redis.set "__weixin_access_token__", access_token
-          SimpleWx.redis.expire "__weixin_access_token__", 30.minutes.to_i
+          SimpleWx.redis.expire "__weixin_access_token__", 30*60
         end
       end
       access_token

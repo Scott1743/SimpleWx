@@ -41,14 +41,14 @@ module SimpleWx
       url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=#{@access_token}"
       response = RestClient.post(url, JSON.generate({button: menu_hash}))
       errcode_check(JSON.parse(response))
-      @error.blank?
+      @error.empty?
     end
 
     def delete
       url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=#{@access_token}"
       response = RestClient.get url
       errcode_check(JSON.parse(response))
-      @error.blank?
+      @error.empty?
     end
 
     def create! menu_hash

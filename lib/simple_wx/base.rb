@@ -3,7 +3,7 @@ module SimpleWx
     attr_accessor :error, :raise_flag
 
     def initialize options = {}
-      raise 'SimpleWx.weixin_config is blank.' if SimpleWx.weixin_config.blank?
+      raise 'SimpleWx.weixin_config is blank.' if SimpleWx.weixin_config.empty?
       @raise_flag = options[:raise_flag]
       @log_flag = options[:log_flag]
       @error = {}
@@ -27,7 +27,7 @@ module SimpleWx
 
       @error = {}
       raise "Responsed nothing from Weixin" if json.nil? && @raise_flag
-      if json["errcode"].present? && json["errcode"].to_i != 0
+      if !json["errcode"].nil? && json["errcode"].to_i != 0
         SimpleWx.logger.error(json)
         @error = json
         raise "Weixin response json with errcode: #{json}" if @raise_flag

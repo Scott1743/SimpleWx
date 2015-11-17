@@ -13,7 +13,7 @@ module SimpleWx
 
     def initialize options = {}
       @timestamp = options[:timestamp] || Time.now.to_i
-      @nonce     = options[:nonce]      || SecureRandom.urlsafe_base64
+      @nonce     = options[:nonce]     || SecureRandom.urlsafe_base64
       @token     = SimpleWx.weixin_config["token"] #TODO 没有就raise错误,用method_missing
     end
 

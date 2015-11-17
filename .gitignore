@@ -21,3 +21,6 @@ tmp
 *.a
 mkmf.log
 /.idea
+*.*.log
+*.log
+/spec/spec_helper.rb

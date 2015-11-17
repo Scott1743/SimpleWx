@@ -56,7 +56,7 @@ module SimpleWx
       url = "https://api.weixin.qq.com/sns/auth?access_token=#{@access_token}&openid=#{@openid}"
       response = RestClient.get url
       errcode_check(JSON.parse(response))
-      @error.blank?
+      @error.empty?
     end
 
     def refresh_token

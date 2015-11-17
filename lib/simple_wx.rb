@@ -2,6 +2,7 @@
 require 'redis'
 require 'yell'
 require 'nokogiri'
+require 'rest-client'
 
 module SimpleWx
   @@weixin_config = {}
