@@ -15,10 +15,10 @@ end
 
 module SimpleWx
   @@weixin_config = {
-    "app_id"=>"wx59326fb0b1303158",
-    "app_secret"=>"b1fc68461fe0619898620d57e6dd00dd",
+    "app_id"=>"app_id",
+    "app_secret"=>"app_secret",
     "serial_no"=>"gh_94948c8e641f",
-    "token"=>"danchedianying"
+    "token"=>"token"
   }
 end
 
