@@ -1,7 +1,7 @@
 
 # SimpleWx
 
-Ruby Api for Micro Message（WeiXin 微信）Public（公众）Platform.
+Ruby Api for Micro Message（WeiXin Wechat 微信）Public（公众）Platform.
 
 [微信公众平台开发文档](http://mp.weixin.qq.com/wiki/home/index.html)
 

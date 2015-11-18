@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Scott1743"]
   spec.email         = ["512981271@qq.com"]
   spec.summary       = ""
-  spec.description   = %q{Ruby Api for WeiXin}
+  spec.description   = %q{Ruby Api for Wechat(WeiXin)}
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -1,6 +1,7 @@
 require "rspec"
 require "simple_wx"
-require "pry-rails"
+require "pry"
+require "pry-nav"
 
 module RestClient
   def self.get(url, headers={}, &block)
